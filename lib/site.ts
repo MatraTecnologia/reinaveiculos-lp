@@ -112,6 +112,61 @@ export const gallery = [
   "/gallery-6.jpg",
 ] as const;
 
+export type QuizStep = {
+  id: string;
+  question: string;
+  caption: string;
+  options: string[];
+};
+
+export const quizSteps: QuizStep[] = [
+  {
+    id: "veiculo",
+    question: "Qual é o seu veículo?",
+    caption: "Para entendermos o tratamento ideal.",
+    options: [
+      "Esportivo / Superesportivo",
+      "SUV / Picape premium",
+      "Sedã / Hatch",
+      "Clássico / Coleção",
+    ],
+  },
+  {
+    id: "servico",
+    question: "O que você procura?",
+    caption: "Selecione o serviço de maior interesse.",
+    options: [
+      "Proteção de pintura — PPF",
+      "Vitrificação & Polimento",
+      "Películas & Insulfilm",
+      "Detalhamento completo",
+    ],
+  },
+  {
+    id: "prioridade",
+    question: "Qual a sua prioridade?",
+    caption: "O que mais importa para você agora.",
+    options: [
+      "Proteção máxima",
+      "Brilho impecável",
+      "Valorizar o veículo",
+      "Tirar todas as dúvidas",
+    ],
+  },
+];
+
+export const buildQuizWhatsapp = (answers: Record<string, string>) => {
+  const lines = [
+    "Olá! Vim pelo site da Reina e gostaria de um orçamento.",
+    answers.veiculo ? `• Veículo: ${answers.veiculo}` : null,
+    answers.servico ? `• Serviço: ${answers.servico}` : null,
+    answers.prioridade ? `• Prioridade: ${answers.prioridade}` : null,
+  ]
+    .filter(Boolean)
+    .join("\n");
+  return `https://wa.me/${site.phoneRaw}?text=${encodeURIComponent(lines)}`;
+};
+
 export const addresses = [
   {
     label: "Unidade Centro",
