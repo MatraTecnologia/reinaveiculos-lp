@@ -18,6 +18,7 @@ export const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
       smoothWheel: true,
       touchMultiplier: 1.6,
     });
+    (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     let frame = 0;
     const raf = (time: number) => {
@@ -43,6 +44,7 @@ export const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
     return () => {
       cancelAnimationFrame(frame);
       document.removeEventListener("click", onAnchorClick);
+      delete (window as unknown as { __lenis?: Lenis }).__lenis;
       lenis.destroy();
     };
   }, []);
