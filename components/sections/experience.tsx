@@ -94,8 +94,8 @@ export const Experience = () => {
         <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-line shadow-card lg:aspect-[3/4]">
           <div ref={imageRef} className="absolute inset-0 -top-[12%] h-[124%]">
             <Image
-              src="https://images.unsplash.com/photo-1610647752706-3bb12232b3ab?auto=format&fit=crop&w=1200&q=80"
-              alt="Detalhamento premium em estúdio"
+              src="/experience.jpg"
+              alt="Processo de detalhamento premium no estúdio Reina"
               fill
               sizes="(max-width: 1024px) 100vw, 55vw"
               className="object-cover"

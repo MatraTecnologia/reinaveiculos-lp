@@ -16,7 +16,7 @@ export const Features = () => {
   return (
     <section
       id="diferenciais"
-      className="relative border-t border-line bg-surface py-24 lg:py-32"
+      className="relative bg-surface py-24 lg:py-32"
     >
       <div className="container-px">
         <motion.div

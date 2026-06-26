@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { EASE_PREMIUM } from "@/lib/motion";
 
-type Variant = "primary" | "secondary";
+type Variant = "primary" | "secondary" | "ghost";
 
 type AnimatedButtonProps = {
   children: React.ReactNode;
@@ -23,6 +23,8 @@ const styles: Record<Variant, string> = {
   primary: "bg-brand text-white shadow-brand hover:bg-brand-soft",
   secondary:
     "border border-line bg-white/[0.02] text-foreground hover:border-white/25 hover:bg-white/[0.05]",
+  ghost:
+    "border border-white/25 bg-white/[0.06] text-white hover:border-white/50 hover:bg-white/[0.12]",
 };
 
 export const AnimatedButton = ({

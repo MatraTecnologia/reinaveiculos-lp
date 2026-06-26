@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
 import { ArrowUpRight } from "lucide-react";
-import { EASE_PREMIUM } from "@/lib/motion";
 
 type VideoCardProps = {
   title: string;
@@ -27,7 +27,21 @@ export const VideoCard = ({
   dimmed,
   onHover,
 }: VideoCardProps) => {
+  const mediaRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Zoom suave da mídia. O tamanho do card é controlado pelo grid (Services),
+  // então nenhum card se sobrepõe — todos respeitam o próprio espaço.
+  useGSAP(
+    () => {
+      gsap.to(mediaRef.current, {
+        scale: active ? 1.08 : 1,
+        duration: 0.6,
+        ease: "power3.out",
+      });
+    },
+    { dependencies: [active], scope: mediaRef },
+  );
 
   useEffect(() => {
     const el = videoRef.current;
@@ -41,30 +55,24 @@ export const VideoCard = ({
   }, [active]);
 
   return (
-    <motion.article
-      onHoverStart={() => onHover(index)}
-      onHoverEnd={() => onHover(null)}
+    <article
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={() => onHover(null)}
       onFocus={() => onHover(index)}
       onBlur={() => onHover(null)}
-      animate={{
-        scale: active ? 1.12 : dimmed ? 0.97 : 1,
-        opacity: dimmed ? 0.78 : 1,
-      }}
-      transition={{ duration: 0.45, ease: EASE_PREMIUM }}
       tabIndex={0}
-      className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-3xl border border-line bg-card shadow-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
-      style={{ zIndex: active ? 20 : 1, willChange: "transform" }}
+      className="group relative h-full min-h-[260px] cursor-pointer overflow-hidden rounded-3xl border border-line bg-card shadow-card transition-colors duration-500 hover:border-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
     >
-      <motion.div
+      <div
+        ref={mediaRef}
         className="absolute inset-0"
-        animate={{ scale: active ? 1.12 : 1 }}
-        transition={{ duration: 0.6, ease: EASE_PREMIUM }}
+        style={{ willChange: "transform" }}
       >
         <Image
           src={image}
           alt={title}
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 640px) 100vw, 50vw"
           className="object-cover"
         />
         {video && (
@@ -80,30 +88,31 @@ export const VideoCard = ({
             }`}
           />
         )}
-      </motion.div>
+      </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/15 to-transparent" />
+      <div
+        className={`absolute inset-0 bg-black transition-opacity duration-500 ${
+          dimmed ? "opacity-45" : "opacity-0"
+        }`}
+      />
 
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 sm:p-8">
-        <div>
-          <h3 className="text-lg font-bold tracking-tight sm:text-xl">
-            {title}
-          </h3>
-          <motion.p
-            className="mt-2 max-w-sm text-sm leading-relaxed text-muted"
-            animate={{ opacity: active ? 1 : 0.001, y: active ? 0 : 8 }}
-            transition={{ duration: 0.4, ease: EASE_PREMIUM }}
-          >
-            {description}
-          </motion.p>
-        </div>
+      <h3 className="absolute inset-x-0 top-0 px-6 pt-7 text-center text-lg font-bold leading-tight tracking-tight text-white sm:text-xl">
+        {title}
+      </h3>
+
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+        <p className="max-w-[68%] text-sm leading-snug text-white/70">
+          {description}
+        </p>
         <span
           aria-hidden
-          className="grid size-11 shrink-0 place-items-center rounded-full border border-line bg-black/40 backdrop-blur-sm transition-colors duration-300 group-hover:border-brand group-hover:bg-brand"
+          className="grid size-11 shrink-0 place-items-center rounded-full border border-white/20 bg-black/40 text-white backdrop-blur-sm transition-colors duration-300 group-hover:border-brand group-hover:bg-brand"
         >
           <ArrowUpRight className="size-5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
         </span>
       </div>
-    </motion.article>
+    </article>
   );
 };

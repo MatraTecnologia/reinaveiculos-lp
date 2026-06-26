@@ -3,7 +3,11 @@ import { Manrope } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { StructuredData } from "@/components/seo/structured-data";
+
+const themeScript = `(function(){try{var t=localStorage.getItem('reina-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:'dark';}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -69,10 +73,21 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={manrope.variable}>
+    <html
+      lang="pt-BR"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={manrope.variable}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="antialiased">
         <StructuredData />
-        <SmoothScroll>{children}</SmoothScroll>
+        <ThemeProvider>
+          <SmoothScroll>{children}</SmoothScroll>
+          <ThemeToggle />
+        </ThemeProvider>
       </body>
     </html>
   );

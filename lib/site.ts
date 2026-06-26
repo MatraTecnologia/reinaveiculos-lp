@@ -56,6 +56,7 @@ export type Service = {
   name: string;
   description: string;
   image: string;
+  video?: string;
 };
 
 export const services: Service[] = [
@@ -63,33 +64,31 @@ export const services: Service[] = [
     id: "ppf",
     name: "PPF — Proteção de Pintura",
     description:
-      "Película de poliuretano autorregenerável contra riscos, impactos e desgaste do dia a dia.",
-    image:
-      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80",
+      "Película autorregenerável contra riscos, impactos e desgaste do dia a dia.",
+    image: "/service-ppf.jpg",
+    video: "/service-ppf.mp4",
   },
   {
     id: "vitrificacao",
     name: "Vitrificação & Polimento",
     description:
-      "Correção de pintura e camada cerâmica de alta dureza para brilho profundo e proteção duradoura.",
-    image:
-      "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?auto=format&fit=crop&w=1400&q=80",
+      "Correção de pintura e camada cerâmica de alta dureza para brilho profundo e duradouro.",
+    image: "/service-polimento.jpg",
+    video: "/service-polimento.mp4",
   },
   {
     id: "peliculas",
     name: "Películas & Insulfilm",
     description:
-      "Conforto térmico, privacidade e proteção UV com acabamento impecável e visão cristalina.",
-    image:
-      "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1400&q=80",
+      "Conforto térmico, privacidade e proteção UV com acabamento impecável.",
+    image: "/service-peliculas.jpg",
   },
   {
     id: "detalhamento",
     name: "Detalhamento & Higienização",
     description:
-      "Renovação completa de interior e motor com técnicas de detailing e higienização profunda.",
-    image:
-      "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=1400&q=80",
+      "Renovação completa de interior e motor com técnicas de detailing profundo.",
+    image: "/service-detalhamento.jpg",
   },
 ];
 
@@ -105,11 +104,12 @@ export const serviceTags = [
 ] as const;
 
 export const gallery = [
-  "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1600&q=80",
-  "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=1600&q=80",
+  "/gallery-1.jpg",
+  "/gallery-2.jpg",
+  "/gallery-3.jpg",
+  "/gallery-4.jpg",
+  "/gallery-5.jpg",
+  "/gallery-6.jpg",
 ] as const;
 
 export const addresses = [

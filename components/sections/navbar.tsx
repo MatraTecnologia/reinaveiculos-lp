@@ -37,7 +37,11 @@ export const Navbar = () => {
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="group relative text-sm font-medium text-muted transition-colors hover:text-foreground"
+                  className={`group relative text-sm font-medium transition-colors ${
+                    scrolled
+                      ? "text-muted hover:text-foreground"
+                      : "text-white/85 hover:text-white"
+                  }`}
                 >
                   {item.label}
                   <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-brand transition-all duration-300 group-hover:w-full" />

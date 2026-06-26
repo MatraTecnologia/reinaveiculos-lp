@@ -1,0 +1,27 @@
+node_modules
+.next
+.git
+.gitignore
+.dockerignore
+Dockerfile
+npm-debug.log*
+yarn-error.log*
+
+# Mídia original pesada (apenas os assets otimizados em /public/* são usados)
+public/midia
+
+# Ferramentas de geração de assets (não necessárias no runtime)
+scripts
+
+# Capturas/screenshots de referência
+*.png
+screencapture-*.png
+
+# Editor / SO
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Ambiente
+.env*.local
