@@ -6,6 +6,7 @@ import { About } from "@/components/sections/about";
 import { Gallery } from "@/components/sections/gallery";
 import { Experience } from "@/components/sections/experience";
 import { Quiz } from "@/components/sections/quiz";
+import { QuizModal } from "@/components/sections/quiz-modal";
 import { Footer } from "@/components/sections/footer";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         <Experience />
         <Quiz />
       </main>
+      <QuizModal />
       <Footer />
     </>
   );
